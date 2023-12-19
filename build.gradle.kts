@@ -1,6 +1,9 @@
 plugins {
     java
     id("io.quarkus")
+
+    // https://plugins.gradle.org/plugin/org.flywaydb.flyway
+    id("org.flywaydb.flyway") version "9.16.2"
 }
 
 repositories {
@@ -20,6 +23,7 @@ dependencies {
     // Database
     implementation("io.quarkus:quarkus-hibernate-orm")
     implementation("io.quarkus:quarkus-jdbc-postgresql")
+    implementation("io.quarkus:quarkus-flyway:${quarkusPlatformVersion}")
 
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
