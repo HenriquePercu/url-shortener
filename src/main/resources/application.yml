@@ -1,0 +1,11 @@
+quarkus:
+  datasource:
+    db-kind: postgresql
+
+"%dev":
+   quarkus:
+     datasource:
+       devservices:
+         enabled: true
+         image-name: postgres:14.5
+
