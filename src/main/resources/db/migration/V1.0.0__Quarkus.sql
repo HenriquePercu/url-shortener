@@ -1,7 +1,9 @@
-CREATE TABLE quarkus
+CREATE TABLE URL
 (
-    id   INT,
-    name VARCHAR(20)
+    id SERIAL PRIMARY KEY,
+    key VARCHAR(500),
+    long_url VARCHAR(500),
+    short_url VARCHAR(500),
+    created_at timestamp,
+    updated_at timestamp
 );
-INSERT INTO quarkus(id, name)
-VALUES (1, 'QUARKED');
