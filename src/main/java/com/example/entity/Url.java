@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 import java.sql.Timestamp;
 
-@Entity(name = "URL")
+@Entity(name = "URL") // TODO user java record instead plain getter and setters
 public class Url {
 
     @Id
