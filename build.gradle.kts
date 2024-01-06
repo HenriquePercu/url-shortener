@@ -27,6 +27,10 @@ dependencies {
     implementation("io.quarkus:quarkus-flyway:${quarkusPlatformVersion}")
     implementation("io.quarkus:quarkus-hibernate-orm-panache")
 
+    // Openapi
+    implementation("io.quarkus:quarkus-smallrye-openapi")
+
+
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
     }
