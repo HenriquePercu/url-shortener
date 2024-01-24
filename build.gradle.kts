@@ -21,6 +21,7 @@ dependencies {
     implementation("io.quarkus:quarkus-resteasy-reactive")
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
     implementation("io.quarkus:quarkus-config-yaml")
+    implementation("com.google.guava:guava")
 
     // Database
     implementation("io.quarkus:quarkus-hibernate-orm")
