@@ -18,7 +18,7 @@ import static com.google.common.base.Charsets.US_ASCII;
 @ApplicationScoped
 public class ShortenerService {
 
-    private final String HOSTNAME = "http//localhost:8080/";
+    private final String HOSTNAME = "http//localhost:8080/"; // TODO this should come from an environment variable
 
     @Inject
     UrlRepository urlRepository;
@@ -28,19 +28,18 @@ public class ShortenerService {
     public UrlResponse shortenUrl(UrlRequest urlRequest) {
         var shortenedKey = BaseEncoding.base64Url().encode(urlRequest.longUrl().getBytes(US_ASCII));
 
-        if(shortenedKey.length() > 14){
+        if (shortenedKey.length() > 14) {
             shortenedKey = shortenedKey.substring(0, 14);
         }
 
         LOG.info(String.format("URL %s was shortened to %s", urlRequest.longUrl(), shortenedKey));
 
-        Url url = new Url();
-
-        url.setLongUrl(urlRequest.longUrl());
-        url.setCreatedAt(Timestamp.from(Instant.now()));
-        url.setUpdatedAt(Timestamp.from(Instant.now()));
-        url.setShortUrl(HOSTNAME + shortenedKey);
-        url.setKey(shortenedKey);
+        var url = Url.builder()
+                .shortUrl(HOSTNAME + shortenedKey)
+                .longUrl(urlRequest.longUrl())
+                .createdAt(Timestamp.from(Instant.now()))
+                .updatedAt(Timestamp.from(Instant.now()))
+                .key(shortenedKey).build();
 
         urlRepository.persist(url);
 

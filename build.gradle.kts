@@ -4,6 +4,7 @@ plugins {
 
     // https://plugins.gradle.org/plugin/org.flywaydb.flyway
     id("org.flywaydb.flyway") version "9.16.2"
+    id("io.freefair.lombok") version "8.4"
 }
 
 repositories {
@@ -32,10 +33,11 @@ dependencies {
     // Openapi
     implementation("io.quarkus:quarkus-smallrye-openapi")
 
-
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
-    }
+
+    compileOnly("org.projectlombok:lombok:0.11.0")
+}
 
 group = "com.example"
 version = "1.0-SNAPSHOT"
