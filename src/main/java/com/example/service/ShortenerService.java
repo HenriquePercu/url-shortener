@@ -18,6 +18,8 @@ import static com.google.common.base.Charsets.US_ASCII;
 @ApplicationScoped
 public class ShortenerService {
 
+    private final String HOSTNAME = "http//localhost:8080/";
+
     @Inject
     UrlRepository urlRepository;
 
@@ -37,7 +39,7 @@ public class ShortenerService {
         url.setLongUrl(urlRequest.longUrl());
         url.setCreatedAt(Timestamp.from(Instant.now()));
         url.setUpdatedAt(Timestamp.from(Instant.now()));
-        url.setShortUrl(shortenedKey); // TODO it's wrong, need to concat the hostname
+        url.setShortUrl(HOSTNAME + shortenedKey);
         url.setKey(shortenedKey);
 
         urlRepository.persist(url);
