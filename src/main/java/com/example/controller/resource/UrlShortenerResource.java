@@ -10,6 +10,8 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import org.jboss.resteasy.reactive.RestResponse;
+import org.jboss.resteasy.reactive.RestResponse.ResponseBuilder;
 
 @Path("/v1/shortener")
 public class UrlShortenerResource {
@@ -21,8 +23,10 @@ public class UrlShortenerResource {
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     @Transactional
-    public UrlResponse shortenUrl(UrlRequest urlRequest) {
-        return shortenerService.shortenUrl(urlRequest); // TODO return proper HTTP status
+    public RestResponse<UrlResponse> shortenUrl(UrlRequest urlRequest) {
+        return ResponseBuilder
+                .ok(shortenerService.shortenUrl(urlRequest))
+                .build();
     }
 
 }
