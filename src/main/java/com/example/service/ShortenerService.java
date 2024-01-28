@@ -18,7 +18,7 @@ import static com.google.common.base.Charsets.US_ASCII;
 @ApplicationScoped
 public class ShortenerService {
 
-    private final String HOSTNAME = "http//localhost:8080/"; // TODO this should come from an environment variable
+    private final String HOSTNAME = "http://localhost:8080/v1/"; // TODO this should come from an environment variable
 
     @Inject
     UrlRepository urlRepository;
@@ -44,6 +44,10 @@ public class ShortenerService {
         urlRepository.persist(url);
 
         return new UrlResponse(url.getKey(), url.getLongUrl(), url.getShortUrl());
+    }
+
+    public Url getLongUrlByKey(String key) {
+        return urlRepository.findByKey(key).get(); // TODO IF not present throw a 404
     }
 
 }
