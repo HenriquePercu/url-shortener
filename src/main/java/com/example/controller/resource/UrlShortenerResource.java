@@ -5,6 +5,7 @@ import com.example.controller.request.UrlResponse;
 import com.example.service.ShortenerService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -25,7 +26,7 @@ public class UrlShortenerResource {
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     @Transactional
-    public RestResponse<UrlResponse> shortenUrl(UrlRequest urlRequest) {
+    public RestResponse<UrlResponse> shortenUrl(@Valid UrlRequest urlRequest) {
         return ResponseBuilder
                 .ok(shortenerService.shortenUrl(urlRequest))
                 .build();
