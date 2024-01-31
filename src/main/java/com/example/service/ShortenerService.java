@@ -3,8 +3,8 @@ package com.example.service;
 import com.example.controller.request.UrlRequest;
 import com.example.controller.request.UrlResponse;
 import com.example.entity.Url;
+import com.example.exception.UrlNotFoundException;
 import com.example.repository.UrlRepository;
-import com.google.common.base.Charsets;
 import com.google.common.io.BaseEncoding;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -47,7 +47,9 @@ public class ShortenerService {
     }
 
     public Url getLongUrlByKey(String key) {
-        return urlRepository.findByKey(key).get(); // TODO IF not present throw a 404
+        return urlRepository
+                .findByKey(key)
+                .orElseThrow(() -> new UrlNotFoundException("Url not found for key: " + key)); // TODO IF not present throw a 404
     }
 
 }
