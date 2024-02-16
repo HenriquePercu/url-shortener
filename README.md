@@ -2,9 +2,11 @@
 
 This project is a solution for this coding challenge [Url Shortener](https://codingchallenges.fyi/challenges/challenge-url-shortener/)
 
-# Technologies
+## API Documentation
 
-TODO
+THe API documentation is accessible in the following [URL](http://localhost:8080/q/swagger-ui/#/): 
+
+# Technologies
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
