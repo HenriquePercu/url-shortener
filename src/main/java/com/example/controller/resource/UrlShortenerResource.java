@@ -32,7 +32,6 @@ public class UrlShortenerResource {
                 .build();
     }
 
-
     @GET
     @Path("/{key}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -41,6 +40,18 @@ public class UrlShortenerResource {
         return ResponseBuilder
                 .create(Response.Status.FOUND)
                 .location(new URI(shortenerService.getLongUrlByKey(key).getLongUrl()))
+                .build();
+    }
+
+    @DELETE
+    @Path("/{key}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Transactional
+    public RestResponse<Object> deleteUrlByKey(@PathParam("key") String key) throws URISyntaxException {
+        shortenerService.deleteUrlByKey(key);
+
+        return ResponseBuilder
+                .noContent()
                 .build();
     }
 }

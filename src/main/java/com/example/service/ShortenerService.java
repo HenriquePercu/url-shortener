@@ -28,7 +28,7 @@ public class ShortenerService {
     public UrlResponse shortenUrl(UrlRequest urlRequest) {
         var existentUrl = urlRepository.findByLongUrl(urlRequest.longUrl());
 
-        if(existentUrl.isPresent()){
+        if (existentUrl.isPresent()) {
             return new UrlResponse(existentUrl.get().getKey(), existentUrl.get().getLongUrl(), existentUrl.get().getShortUrl());
         }
 
@@ -56,6 +56,14 @@ public class ShortenerService {
         return urlRepository
                 .findByKey(key)
                 .orElseThrow(() -> new UrlNotFoundException("Url not found for key: " + key));
+    }
+
+    public void deleteUrlByKey(String key) {
+        Url urlToBeDeleted =  urlRepository
+                .findByKey(key)
+                .orElseThrow(() -> new UrlNotFoundException("Url not found for key: " + key));
+
+        urlRepository.delete(urlToBeDeleted);
     }
 
 }
