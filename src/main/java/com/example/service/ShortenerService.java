@@ -26,6 +26,12 @@ public class ShortenerService {
     private static final Logger LOG = Logger.getLogger(ShortenerService.class);
 
     public UrlResponse shortenUrl(UrlRequest urlRequest) {
+        var existentUrl = urlRepository.findByLongUrl(urlRequest.longUrl());
+
+        if(existentUrl.isPresent()){
+            return new UrlResponse(existentUrl.get().getKey(), existentUrl.get().getLongUrl(), existentUrl.get().getShortUrl());
+        }
+
         var shortenedKey = BaseEncoding.base64Url().encode(urlRequest.longUrl().getBytes(US_ASCII));
 
         if (shortenedKey.length() > 14) {
@@ -49,7 +55,7 @@ public class ShortenerService {
     public Url getLongUrlByKey(String key) {
         return urlRepository
                 .findByKey(key)
-                .orElseThrow(() -> new UrlNotFoundException("Url not found for key: " + key)); // TODO IF not present throw a 404
+                .orElseThrow(() -> new UrlNotFoundException("Url not found for key: " + key));
     }
 
 }

@@ -13,4 +13,8 @@ public class UrlRepository implements PanacheRepository<Url> {
         return find("key", key).firstResultOptional();
     }
 
+    public Optional<Url> findByLongUrl(String longUrl) {
+        return find("longUrl", longUrl).firstResultOptional();
+    }
+
 }

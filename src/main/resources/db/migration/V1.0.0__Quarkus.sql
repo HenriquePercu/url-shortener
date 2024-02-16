@@ -8,4 +8,4 @@ CREATE TABLE URL
     updated_at timestamp
 );
 
-create sequence URL_SEQ start with 1 increment by 50; -- TODO we shouldn't need this, fix on the mapping
+create sequence URL_SEQ start with 1 increment by 50;
